@@ -1,0 +1,71 @@
+﻿@model IEnumerable<DemoProjectMVC.Models.Students>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                <h5> Student List</h5>
+                <a asp-action="Create"><i class="bi bi-plus-square"></i> Create</a>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FirstName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.LastName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.EmailAddress)
+                                </th>
+
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ContactNumber)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Picture)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FirstName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LastName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EmailAddress)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ContactNumber)
+                                    </td>
+                                    <td>
+                                        <img width="50" src="~/Images/students/@(item.Picture)" />
+                                    </td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

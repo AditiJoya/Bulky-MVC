@@ -1,0 +1,148 @@
+﻿@model DemoProjectMVC.Models.Students
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Students</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="input-group mb-3">
+                        <label class="input-group-text"><i class="bi bi-person"></i></label>
+                        <input asp-for="FirstName" class="form-control" placeholder="First Name" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label asp-for="LastName" class="input-group-text"><i class="bi bi-person"></i></label>
+                        <input asp-for="LastName" class="form-control" placeholder="Last Name" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label asp-for="EmailAddress" class="input-group-text"></label>
+                        <input asp-for="EmailAddress" class="form-control" placeholder="example@email.com" />
+                        <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label asp-for="DateOfBirth" class="input-group-text"></label>
+                        <input asp-for="DateOfBirth" class="form-control" />
+                        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label asp-for="ContactNumber" class="input-group-text"></label>
+                        <input asp-for="ContactNumber" class="form-control" />
+                        <span asp-validation-for="ContactNumber" class="text-danger"></span>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label for="gender" style="padding-right: 65px; font-weight: bold;">Gender</label>
+                        <div class="form-check form-check-inline">
+                            <input asp-for="Gender" class="form-check-input" type="radio" id="male" value="male">
+                            <label class="form-check-label" for="male">Male</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input asp-for="Gender" class="form-check-input" type="radio" id="female" value="female">
+                            <label class="form-check-label" for="female">Female</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input asp-for="Gender" class="form-check-input" type="radio" id="other" value="other">
+                            <label class="form-check-label" for="other">Other</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group mb-3">
+                        <label asp-for="Street" class="input-group-text"></label>
+                        <textarea rows="1" asp-for="Street" class="form-control"></textarea>
+                        <span asp-validation-for="Street" class="text-danger"></span>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label asp-for="CountryId" class="input-group-text"></label>
+                        <select asp-for="CountryId" class="form-control" asp-items="@ViewBag.CountryId">
+                            <option selected>Choose...</option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label asp-for="StateId" class="input-group-text"></label>
+                        <select asp-for="StateId" class="form-control" asp-items="@ViewBag.StateId">
+                            <option selected>Choose...</option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label asp-for="CityId" class="input-group-text"></label>
+                        <select asp-for="CityId" class="form-control" asp-items="@ViewBag.CityId">
+                            <option selected>Choose...</option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label asp-for="ZipCode" class="input-group-text"></label>
+                        <input asp-for="ZipCode" class="form-control" />
+                        <span asp-validation-for="ZipCode" class="text-danger"></span>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <label for="education" style="padding-right: 65px; font-weight: bold;">Education</label>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Ssc" /> @Html.DisplayNameFor(model => model.Ssc)
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Hsc" /> @Html.DisplayNameFor(model => model.Hsc)
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Bsc" /> @Html.DisplayNameFor(model => model.Bsc)
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Msc" /> @Html.DisplayNameFor(model => model.Msc)
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-7">
+                        <label class="form-label mt-3" for="profilePhoto">Profile Photo</label>
+                        <div class="input-group mb-3">
+                            <input type="file" asp-for="Picture" name="pictureFile" class="form-control" accept="image/*" id="FileUpload" onchange="PreviewImage()" />
+                            <span asp-validation-for="Picture" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-5 mt-5 mb-3">
+                        <div class="imgPreview-area mt-3" id="imgPreview">
+                            <img src="~/Images/students/@Model.Picture" alt="img" id="UploadFile" class="img-fluid" style="width:100%; height:200px;" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        function PreviewImage() {
+            var oFReader = new FileReader();
+            oFReader.readAsDataURL(document.getElementById("FileUpload").files[0]);
+
+            oFReader.onload = function (oFREvent) {
+                document.getElementById("UploadFile").src = oFREvent.target.result;
+            };
+        };
+    </script>
+}
